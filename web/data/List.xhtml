@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="DataListForm">
+
+        <p:panel header="#{bundle.ListDataTitle}">
+
+            <p:dataTable id="datalist" value="#{dataController.items}" var="item"
+                         selectionMode="single" selection="#{dataController.selected}"
+                         rowKey="#{item.dataId}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+              
+
+                <p:column sortBy="#{item.dataId}" filterBy="#{item.dataId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_dataId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dataId}"/>
+                </p:column>
+                <p:column sortBy="#{item.estaId}" filterBy="#{item.estaId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_estaId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estaId}"/>
+                </p:column>
+                <p:column sortBy="#{item.datafetd}" filterBy="#{item.datafetd}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_datafetd}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.datafetd}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.datavalo}" filterBy="#{item.datavalo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_datavalo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.datavalo}"/>
+                </p:column>
+                <p:column sortBy="#{item.dataince}" filterBy="#{item.dataince}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_dataince}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dataince}"/>
+                </p:column>
+                <p:column sortBy="#{item.indaId}" filterBy="#{item.indaId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_indaId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.indaId}"/>
+                </p:column>
+                <p:column sortBy="#{item.dataobse}" filterBy="#{item.dataobse}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_dataobse}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dataobse}"/>
+                </p:column>
+                <p:column sortBy="#{item.datactrl}" filterBy="#{item.datactrl}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_datactrl}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.datactrl}"/>
+                </p:column>
+                <p:column sortBy="#{item.datavers}" filterBy="#{item.datavers}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_datavers}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.datavers}"/>
+                </p:column>
+                <p:column sortBy="#{item.datauing}" filterBy="#{item.datauing}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_datauing}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.datauing}"/>
+                </p:column>
+                <p:column sortBy="#{item.datafing}" filterBy="#{item.datafing}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_datafing}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.datafing}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{item.dataumod}" filterBy="#{item.dataumod}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_dataumod}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dataumod}"/>
+                </p:column>
+                <p:column sortBy="#{item.datafmod}" filterBy="#{item.datafmod}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDataTitle_datafmod}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.datafmod}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+                <f:facet name="footer">
+                    
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

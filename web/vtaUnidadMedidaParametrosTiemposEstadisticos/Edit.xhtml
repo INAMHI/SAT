@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VtaUnidadMedidaParametrosTiemposEstadisticosEditDlg" widgetVar="VtaUnidadMedidaParametrosTiemposEstadisticosEditDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle}">
+
+            <h:form id="VtaUnidadMedidaParametrosTiemposEstadisticosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_nombreParametro}" for="nombreParametro" />
+                        <p:inputText id="nombreParametro" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.nombreParametro}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nombreParametro}" />
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_simboloUnidadMedida}" for="simboloUnidadMedida" />
+                        <p:inputText id="simboloUnidadMedida" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.simboloUnidadMedida}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_simboloUnidadMedida}" />
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_nombreUnidadMedida}" for="nombreUnidadMedida" />
+                        <p:inputText id="nombreUnidadMedida" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.nombreUnidadMedida}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nombreUnidadMedida}" />
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_idsDeEstadisticos}" for="idsDeEstadisticos" />
+                        <p:inputText id="idsDeEstadisticos" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.idsDeEstadisticos}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_idsDeEstadisticos}" />
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_simboloEstadistico}" for="simboloEstadistico" />
+                        <p:inputText id="simboloEstadistico" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.simboloEstadistico}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_simboloEstadistico}" />
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_nombreEstadistico}" for="nombreEstadistico" />
+                        <p:inputText id="nombreEstadistico" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.nombreEstadistico}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nombreEstadistico}" />
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_unidadMedidaTiempo}" for="unidadMedidaTiempo" />
+                        <p:inputText id="unidadMedidaTiempo" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.unidadMedidaTiempo}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_unidadMedidaTiempo}" />
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_medidaTiempo}" for="medidaTiempo" />
+                        <p:inputText id="medidaTiempo" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.medidaTiempo}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_medidaTiempo}" />
+
+                        <h:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_nemonicoCopa}" for="nemonicoCopa" />
+                        <h:outputText id="nemonicoCopa" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.nemonicoCopa}" />
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_idCopa}" for="idCopa" />
+                        <p:inputText id="idCopa" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.idCopa}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_idCopa}" />
+
+                        <p:outputLabel value="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosLabel_idParametro}" for="idParametro" />
+                        <p:inputText id="idParametro" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.idParametro}" title="#{bundle.EditVtaUnidadMedidaParametrosTiemposEstadisticosTitle_idParametro}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.save}" value="#{bundle.Save}" update="display,:VtaUnidadMedidaParametrosTiemposEstadisticosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,VtaUnidadMedidaParametrosTiemposEstadisticosEditDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VtaUnidadMedidaParametrosTiemposEstadisticosEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

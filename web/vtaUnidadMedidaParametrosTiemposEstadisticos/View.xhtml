@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VtaUnidadMedidaParametrosTiemposEstadisticosViewDlg" widgetVar="VtaUnidadMedidaParametrosTiemposEstadisticosViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle}">
+
+            <h:form id="VtaUnidadMedidaParametrosTiemposEstadisticosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected != null}">
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_nombreParametro}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.nombreParametro}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nombreParametro}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_simboloUnidadMedida}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.simboloUnidadMedida}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_simboloUnidadMedida}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_nombreUnidadMedida}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.nombreUnidadMedida}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nombreUnidadMedida}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_idsDeEstadisticos}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.idsDeEstadisticos}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_idsDeEstadisticos}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_simboloEstadistico}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.simboloEstadistico}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_simboloEstadistico}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_nombreEstadistico}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.nombreEstadistico}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nombreEstadistico}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_unidadMedidaTiempo}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.unidadMedidaTiempo}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_unidadMedidaTiempo}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_medidaTiempo}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.medidaTiempo}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_medidaTiempo}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_nemonicoCopa}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.nemonicoCopa}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nemonicoCopa}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_idCopa}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.idCopa}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_idCopa}"/>
+
+                        <h:outputText value="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosLabel_idParametro}"/>
+                        <h:outputText value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected.idParametro}" title="#{bundle.ViewVtaUnidadMedidaParametrosTiemposEstadisticosTitle_idParametro}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="VtaUnidadMedidaParametrosTiemposEstadisticosViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

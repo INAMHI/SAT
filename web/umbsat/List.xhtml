@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="UmbsatListForm">
+
+        <p:panel header="#{bundle.ListUmbsatTitle}">
+
+            <p:dataTable id="datalist" value="#{umbsatController.items}" var="item"
+                         selectionMode="single" selection="#{umbsatController.selected}"
+                         rowKey="#{item.umbsatId}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column sortBy="#{item.umbsatId}" filterBy="#{item.umbsatId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListUmbsatTitle_umbsatId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.umbsatId}"/>
+                </p:column>
+                <p:column sortBy="#{item.umbsatmes}" filterBy="#{item.umbsatmes}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListUmbsatTitle_umbsatmes}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.umbsatmes}"/>
+                </p:column>
+                <p:column sortBy="#{item.umbsatmax}" filterBy="#{item.umbsatmax}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListUmbsatTitle_umbsatmax}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.umbsatmax}"/>
+                </p:column>
+                <p:column sortBy="#{item.umbsatmin}" filterBy="#{item.umbsatmin}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListUmbsatTitle_umbsatmin}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.umbsatmin}"/>
+                </p:column>
+                <p:column sortBy="#{item.umbsatavi}" filterBy="#{item.umbsatavi}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListUmbsatTitle_umbsatavi}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.umbsatavi}"/>
+                </p:column>
+                <p:column sortBy="#{item.umbsatalt}" filterBy="#{item.umbsatalt}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListUmbsatTitle_umbsatalt}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.umbsatalt}"/>
+                </p:column>
+                <p:column sortBy="#{item.umbsatrio}" filterBy="#{item.umbsatrio}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListUmbsatTitle_umbsatrio}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.umbsatrio}"/>
+                </p:column>
+                <p:column sortBy="#{item.umbsatubi}" filterBy="#{item.umbsatubi}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListUmbsatTitle_umbsatubi}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.umbsatubi}"/>
+                </p:column>
+                <p:column sortBy="#{item.umbsatprov}" filterBy="#{item.umbsatprov}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListUmbsatTitle_umbsatprov}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.umbsatprov}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{umbsatController.prepareCreate}" update=":UmbsatCreateForm" oncomplete="UmbsatCreateDialog.show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":UmbsatViewForm" oncomplete="UmbsatViewDialog.show()" disabled="#{empty umbsatController.selected}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":UmbsatEditForm" oncomplete="UmbsatEditDialog.show()" disabled="#{empty umbsatController.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{umbsatController.delete}" update=":growl,datalist" disabled="#{empty umbsatController.selected}"/>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="VtaUnidadMedidaParametrosTiemposEstadisticosListForm">
+
+        <p:panel header="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle}">
+
+            <p:dataTable id="datalist" value="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.items}" var="item"
+                         selectionMode="single" selection="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.selected}"
+                         rowKey="#{item.nemonicoCopa}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column sortBy="#{item.nombreParametro}" filterBy="#{item.nombreParametro}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nombreParametro}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombreParametro}"/>
+                </p:column>
+                <p:column sortBy="#{item.simboloUnidadMedida}" filterBy="#{item.simboloUnidadMedida}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_simboloUnidadMedida}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.simboloUnidadMedida}"/>
+                </p:column>
+                <p:column sortBy="#{item.nombreUnidadMedida}" filterBy="#{item.nombreUnidadMedida}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nombreUnidadMedida}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombreUnidadMedida}"/>
+                </p:column>
+                <p:column sortBy="#{item.idsDeEstadisticos}" filterBy="#{item.idsDeEstadisticos}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_idsDeEstadisticos}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idsDeEstadisticos}"/>
+                </p:column>
+                <p:column sortBy="#{item.simboloEstadistico}" filterBy="#{item.simboloEstadistico}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_simboloEstadistico}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.simboloEstadistico}"/>
+                </p:column>
+                <p:column sortBy="#{item.nombreEstadistico}" filterBy="#{item.nombreEstadistico}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nombreEstadistico}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombreEstadistico}"/>
+                </p:column>
+                <p:column sortBy="#{item.unidadMedidaTiempo}" filterBy="#{item.unidadMedidaTiempo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_unidadMedidaTiempo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.unidadMedidaTiempo}"/>
+                </p:column>
+                <p:column sortBy="#{item.medidaTiempo}" filterBy="#{item.medidaTiempo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_medidaTiempo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.medidaTiempo}"/>
+                </p:column>
+                <p:column sortBy="#{item.nemonicoCopa}" filterBy="#{item.nemonicoCopa}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_nemonicoCopa}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nemonicoCopa}"/>
+                </p:column>
+                <p:column sortBy="#{item.idCopa}" filterBy="#{item.idCopa}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_idCopa}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idCopa}"/>
+                </p:column>
+                <p:column sortBy="#{item.idParametro}" filterBy="#{item.idParametro}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListVtaUnidadMedidaParametrosTiemposEstadisticosTitle_idParametro}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idParametro}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.prepareCreate}" update=":VtaUnidadMedidaParametrosTiemposEstadisticosCreateForm" oncomplete="VtaUnidadMedidaParametrosTiemposEstadisticosCreateDialog.show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VtaUnidadMedidaParametrosTiemposEstadisticosViewForm" oncomplete="VtaUnidadMedidaParametrosTiemposEstadisticosViewDialog.show()" disabled="#{empty vtaUnidadMedidaParametrosTiemposEstadisticosController.selected}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VtaUnidadMedidaParametrosTiemposEstadisticosEditForm" oncomplete="VtaUnidadMedidaParametrosTiemposEstadisticosEditDialog.show()" disabled="#{empty vtaUnidadMedidaParametrosTiemposEstadisticosController.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vtaUnidadMedidaParametrosTiemposEstadisticosController.delete}" update=":growl,datalist" disabled="#{empty vtaUnidadMedidaParametrosTiemposEstadisticosController.selected}"/>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

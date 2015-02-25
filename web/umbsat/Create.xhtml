@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UmbsatCreateDlg" widgetVar="UmbsatCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateUmbsatTitle}">
+
+            <h:form id="UmbsatCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{umbsatController.selected != null}">
+
+                        <h:outputLabel value="#{bundle.CreateUmbsatLabel_umbsatmes}" for="umbsatmes" />
+                        <p:inputText id="umbsatmes" value="#{umbsatController.selected.umbsatmes}" title="#{bundle.CreateUmbsatTitle_umbsatmes}" />
+
+                        <h:outputLabel value="#{bundle.CreateUmbsatLabel_umbsatmax}" for="umbsatmax" />
+                        <p:inputText id="umbsatmax" value="#{umbsatController.selected.umbsatmax}" title="#{bundle.CreateUmbsatTitle_umbsatmax}" />
+
+                        <h:outputLabel value="#{bundle.CreateUmbsatLabel_umbsatmin}" for="umbsatmin" />
+                        <p:inputText id="umbsatmin" value="#{umbsatController.selected.umbsatmin}" title="#{bundle.CreateUmbsatTitle_umbsatmin}" />
+
+                        <h:outputLabel value="#{bundle.CreateUmbsatLabel_umbsatavi}" for="umbsatavi" />
+                        <p:inputText id="umbsatavi" value="#{umbsatController.selected.umbsatavi}" title="#{bundle.CreateUmbsatTitle_umbsatavi}" />
+
+                        <h:outputLabel value="#{bundle.CreateUmbsatLabel_umbsatalt}" for="umbsatalt" />
+                        <p:inputText id="umbsatalt" value="#{umbsatController.selected.umbsatalt}" title="#{bundle.CreateUmbsatTitle_umbsatalt}" />
+
+                        <h:outputLabel value="#{bundle.CreateUmbsatLabel_umbsatrio}" for="umbsatrio" />
+                        <p:inputText id="umbsatrio" value="#{umbsatController.selected.umbsatrio}" title="#{bundle.CreateUmbsatTitle_umbsatrio}" />
+
+                        <h:outputLabel value="#{bundle.CreateUmbsatLabel_umbsatubi}" for="umbsatubi" />
+                        <p:inputText id="umbsatubi" value="#{umbsatController.selected.umbsatubi}" title="#{bundle.CreateUmbsatTitle_umbsatubi}" />
+
+                        <h:outputLabel value="#{bundle.CreateUmbsatLabel_umbsatprov}" for="umbsatprov" />
+                        <p:inputText id="umbsatprov" value="#{umbsatController.selected.umbsatprov}" title="#{bundle.CreateUmbsatTitle_umbsatprov}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{umbsatController.saveNew}" value="#{bundle.Save}" update="display,:UmbsatListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,UmbsatCreateDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UmbsatCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DataCreateDlg" widgetVar="DataCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateDataTitle}">
+
+            <h:form id="DataCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dataController.selected != null}">
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_estaId}" for="estaId" />
+                        <p:inputText id="estaId" value="#{dataController.selected.estaId}" title="#{bundle.CreateDataTitle_estaId}" />
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_datafetd}" for="datafetd" />
+                        <p:calendar id="datafetd" pattern="MM/dd/yyyy HH:mm:ss" value="#{dataController.selected.datafetd}" title="#{bundle.EditDataTitle_datafetd}" required="true" requiredMessage="#{bundle.EditDataRequiredMessage_datafetd}" showOn="button"/>
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_datavalo}" for="datavalo" />
+                        <p:inputText id="datavalo" value="#{dataController.selected.datavalo}" title="#{bundle.CreateDataTitle_datavalo}" />
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_dataince}" for="dataince" />
+                        <p:inputText id="dataince" value="#{dataController.selected.dataince}" title="#{bundle.CreateDataTitle_dataince}" />
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_indaId}" for="indaId" />
+                        <p:inputText id="indaId" value="#{dataController.selected.indaId}" title="#{bundle.CreateDataTitle_indaId}" />
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_dataobse}" for="dataobse" />
+                        <p:inputText id="dataobse" value="#{dataController.selected.dataobse}" title="#{bundle.CreateDataTitle_dataobse}" />
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_datactrl}" for="datactrl" />
+                        <p:inputText id="datactrl" value="#{dataController.selected.datactrl}" title="#{bundle.CreateDataTitle_datactrl}" />
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_datavers}" for="datavers" />
+                        <p:inputText id="datavers" value="#{dataController.selected.datavers}" title="#{bundle.CreateDataTitle_datavers}" />
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_datauing}" for="datauing" />
+                        <p:inputText id="datauing" value="#{dataController.selected.datauing}" title="#{bundle.CreateDataTitle_datauing}" required="true" requiredMessage="#{bundle.CreateDataRequiredMessage_datauing}"/>
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_datafing}" for="datafing" />
+                        <p:calendar id="datafing" pattern="MM/dd/yyyy HH:mm:ss" value="#{dataController.selected.datafing}" title="#{bundle.EditDataTitle_datafing}" required="true" requiredMessage="#{bundle.EditDataRequiredMessage_datafing}" showOn="button"/>
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_dataumod}" for="dataumod" />
+                        <p:inputText id="dataumod" value="#{dataController.selected.dataumod}" title="#{bundle.CreateDataTitle_dataumod}" />
+
+                        <h:outputLabel value="#{bundle.CreateDataLabel_datafmod}" for="datafmod" />
+                        <p:calendar id="datafmod" pattern="MM/dd/yyyy HH:mm:ss" value="#{dataController.selected.datafmod}" title="#{bundle.EditDataTitle_datafmod}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{dataController.saveNew}" value="#{bundle.Save}" update="display,:DataListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DataCreateDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DataCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

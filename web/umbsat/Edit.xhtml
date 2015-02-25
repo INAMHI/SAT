@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UmbsatEditDlg" widgetVar="UmbsatEditDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.EditUmbsatTitle}">
+
+            <h:form id="UmbsatEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{umbsatController.selected != null}">
+
+                        <h:outputLabel value="#{bundle.EditUmbsatLabel_umbsatId}" for="umbsatId" />
+                        <h:outputText id="umbsatId" value="#{umbsatController.selected.umbsatId}" />
+
+                        <h:outputLabel value="#{bundle.EditUmbsatLabel_umbsatmes}" for="umbsatmes" />
+                        <p:inputText id="umbsatmes" value="#{umbsatController.selected.umbsatmes}" title="#{bundle.EditUmbsatTitle_umbsatmes}" />
+
+                        <h:outputLabel value="#{bundle.EditUmbsatLabel_umbsatmax}" for="umbsatmax" />
+                        <p:inputText id="umbsatmax" value="#{umbsatController.selected.umbsatmax}" title="#{bundle.EditUmbsatTitle_umbsatmax}" />
+
+                        <h:outputLabel value="#{bundle.EditUmbsatLabel_umbsatmin}" for="umbsatmin" />
+                        <p:inputText id="umbsatmin" value="#{umbsatController.selected.umbsatmin}" title="#{bundle.EditUmbsatTitle_umbsatmin}" />
+
+                        <h:outputLabel value="#{bundle.EditUmbsatLabel_umbsatavi}" for="umbsatavi" />
+                        <p:inputText id="umbsatavi" value="#{umbsatController.selected.umbsatavi}" title="#{bundle.EditUmbsatTitle_umbsatavi}" />
+
+                        <h:outputLabel value="#{bundle.EditUmbsatLabel_umbsatalt}" for="umbsatalt" />
+                        <p:inputText id="umbsatalt" value="#{umbsatController.selected.umbsatalt}" title="#{bundle.EditUmbsatTitle_umbsatalt}" />
+
+                        <h:outputLabel value="#{bundle.EditUmbsatLabel_umbsatrio}" for="umbsatrio" />
+                        <p:inputText id="umbsatrio" value="#{umbsatController.selected.umbsatrio}" title="#{bundle.EditUmbsatTitle_umbsatrio}" />
+
+                        <h:outputLabel value="#{bundle.EditUmbsatLabel_umbsatubi}" for="umbsatubi" />
+                        <p:inputText id="umbsatubi" value="#{umbsatController.selected.umbsatubi}" title="#{bundle.EditUmbsatTitle_umbsatubi}" />
+
+                        <h:outputLabel value="#{bundle.EditUmbsatLabel_umbsatprov}" for="umbsatprov" />
+                        <p:inputText id="umbsatprov" value="#{umbsatController.selected.umbsatprov}" title="#{bundle.EditUmbsatTitle_umbsatprov}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{umbsatController.save}" value="#{bundle.Save}" update="display,:UmbsatListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,UmbsatEditDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UmbsatEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

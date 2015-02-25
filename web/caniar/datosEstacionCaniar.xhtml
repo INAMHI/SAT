@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>S.A.T. Cañar</title>
+        <f:metadata>
+            <f:viewParam name="estacion"  value="#{dataController.estacion}"/>
+            <f:viewParam name="copa"  value="#{dataController.copa}"/>
+            <f:viewParam name="nombre"   value="#{dataController.nombreEstacion}"/>
+            <f:event type="preRenderView" listener="#{dataController.createLinearModel()}" />
+        </f:metadata>
+        <style type="text/css">
+            .titulo{
+                font-size: 25px;
+                color: darkblue;
+                font-family: Calibri;
+                font-weight:  bold;
+            }
+
+            .alignright {
+                float: right;
+                padding-right: 45px;
+                padding-top: 16px;
+                height: 90px;
+                margin: 0;
+            }
+
+
+            .alignleft {
+                float: left;
+                padding-left: 45px;
+                padding-top: 11px;
+                margin: 0;
+            }
+
+
+            .body{
+                width: 100%;
+                height:100%;
+                margin: 0;
+                background-size: 100%;
+            }
+
+            .centeredColumn {
+                text-align:center !important;
+            }
+
+            html{
+                background-image: url(../images/DSC06124B.jpg);
+                height:100%;
+                margin: 0;
+            }
+
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript">           
+            var chart;
+            function init(){       
+                datosX=${dataController.datosX};
+                //alert(datosX);
+                datosY=${dataController.datosY};
+                //alert(datosY);
+                chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'container'
+                    },
+                    title: {
+                        text: '${dataController.estacion} - ${dataController.nombreEstacion}',
+                        x: -20 //center
+                    },
+                    exporting: {
+                        url: 'http://export.highcharts.com/index-utf8-encode.php'
+                    },
+                    subtitle: {
+                        text: '${currentDate.toLocaleString()}',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: datosY
+                    },
+                    yAxis: {
+                        min:0,
+                        max:'${dataController.getyMax()}',
+                        title: {
+                            text: '${dataController.parametro}'
+                        },
+                        plotLines:[{
+                                value:'${dataController.aviso}',
+                                color: '#ff8000',
+                                width:2,
+                                zIndex:4,
+                                label:{text:'AVISO'}
+                            },{
+                                value:'${dataController.alerta}',
+                                color: '#ff0000',
+                                width:2,
+                                zIndex:4,
+                                label:{text:'ALERTA'}
+                            }]
+                    },
+                    
+                    tooltip: {
+                        valueSuffix: ' ${dataController.sufijo}'
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [{
+                            name: '${dataController.nombreSerie}',  
+                            color: '#0000ff',
+                            data: datosX
+                            
+                        }]
+                });
+                
+            }
+            
+            function requestData() {
+                chart.destroy();
+                datosX=${dataController.datosX};
+               
+                datosY=${dataController.datosY};
+               
+                chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'container'
+                    },
+                    title: {
+                        text: '${dataController.estacion} - ${dataController.nombreEstacion}',
+                        x: -20 //center
+                    },
+                    exporting: {
+                        url: 'http://export.highcharts.com/index-utf8-encode.php'
+                    },
+                    subtitle: {
+                        text: '${currentDate.toLocaleString()}',
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: datosY
+                    },
+                    yAxis: {
+                        min:0,
+                        max:'${dataController.getyMax()}',
+                        title: {
+                            text: '${dataController.parametro}'
+                        },
+                        plotLines:[{
+                                value:'${dataController.aviso}',
+                                color: '#ff8000',
+                                width:2,
+                                zIndex:4,
+                                label:{text:'AVISO'}
+                            },{
+                                value:'${dataController.alerta}',
+                                color: '#ff0000',
+                                width:2,
+                                zIndex:4,
+                                label:{text:'ALERTA'}
+                            }]
+                    },
+                    
+                    tooltip: {
+                        valueSuffix: ' ${dataController.sufijo}'
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [{
+                            name: '${dataController.nombreSerie}',  
+                            color: '#0000ff',
+                            data: datosX
+                            
+                        }]
+                });
+                        
+            }
+       
+        </script>
+    </h:head>
+    <h:body onload="init()" >
+        <h:form>
+            <p:poll interval="20" listener="#{dataController.createLinearModelPoll()}" oncomplete="requestData()" update="panel"/>
+            <div align="center" style="visibility: visible; height: 120px; background-image: url(../images/header.jpg); background-size: 120%;">
+                <a href="http://www.inamhi.gob.ec"><h:graphicImage url="/images/inamhilogo.png" alt="Welcome to Inamhi" title="Welcome to Inamhi" styleClass="alignright"/></a>
+                <a href="http://www.gestionderiesgos.gob.ec/"><h:graphicImage url="/images/sngr_logo.png" alt="Welcome to SNGR" title="Welcome to SNGR" styleClass="alignleft"/></a>
+            </div>
+            <div class="body" align="center">
+                <div align="center">
+                    <div class="titulo" align="center"><br/>SISTEMA  DE ALERTA TEMPRANA PARA INUNDACIONES (S.A.T) CAÑAR
+                    </div>
+                    <h:panelGrid id="panel" columns="1">
+                        <div id="container"  style="width: 1000px; height: 520px;"  >
+                        </div>
+                        <p:dataTable var="r" value="#{dataController.getItems2()}" styleClass="centeredColumn">  
+                            <p:column headerText="Provincia">  
+                                <h:outputText value="#{r.umbsatubi}" />  
+                            </p:column>  
+                            <p:column headerText="Cantón">  
+                                <h:outputText value="#{r.umbsatprov}" />  
+                            </p:column>  
+                            <p:column headerText="Rio">  
+                                <h:outputText value="#{r.umbsatrio}" />  
+                            </p:column>  
+                            <p:column headerText="Valor Aviso">  
+                                <h:outputText value="#{r.umbsatavi}" />  
+                            </p:column>  
+                            <p:column headerText="Valor Alerta">  
+                                <h:outputText value="#{r.umbsatalt}" />  
+                            </p:column>  
+                        </p:dataTable> 
+                        <h:panelGrid columns="2"  >
+                            <p:commandLink action="/index.xhtml?faces-redirect=true" ajax="true" >
+                                <h:graphicImage url="/images/home.png" alt="Home" title="Inicio" width="64" height="64"  />
+                            </p:commandLink>
+                            <p:commandLink action="#{dataController.atras('caniar')}" ajax="true" >
+                                <h:graphicImage url="/images/back.png" alt="Home" title="Atrás"  width="64" height="64"/>
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>

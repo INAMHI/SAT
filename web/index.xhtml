@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Sistemas de alerta temprana</title>
+        <style type="text/css">
+            /* General settings */
+            .ui-layout-center {                    
+                overflow:hidden !important;
+            }
+
+            .ui-layout-center .ui-layout-unit-content {
+                overflow:hidden !important;
+            }     
+
+            .ui-datatable .ui-datatable-data tr{
+                height : 50px;
+            }
+            .alerta{
+                background-image: url('images/alerta.jpg');
+                background-size: 100%;
+                font-weight: bold;
+                color: ghostwhite;
+                width: 200px;
+                height: 57px;
+
+            }
+
+            .normal{
+                background-image: url('images/normal.jpg');
+                background-size: 100%;
+                font-weight: bold;
+                color: ghostwhite;
+                width: 200px;
+                height: 57px;
+
+            }
+
+            .aviso{
+                background-image: url('images/aviso.jpg');
+                background-size: 100%;
+                font-weight: bold;
+                color: ghostwhite;
+                width: 200px;
+                height: 57px;
+            }
+
+
+            .titulo{
+                font-size: 25px;
+                color: darkblue;
+                font-family: Calibri;
+                font-weight:  bold;
+            }
+
+            .alignright {
+                float: right;
+                padding-right: 45px;
+                padding-top: 16px;
+                height: 90px;
+            }
+
+
+            .alignleft {
+                float: left;
+                padding-left: 45px;
+                padding-top: 11px;
+            }
+
+
+            .body{
+                width: 100%;
+                height:100%;
+                margin: 0;
+                background-size: 100%;
+            }
+
+            .centeredColumn {
+                text-align:center !important;
+            }
+
+            html{
+                background-image: url(images/DSC06124B.jpg);
+                height:100%;
+                margin: 0;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="principal">
+            <p:growl showDetail="true" showSummary="true"  id="growl" /> 
+            <p:poll listener="#{sistController.poll()}" update="datalist" async="true" interval="300"/>
+            <p:messages id="messages" />  
+            <div align="center" style="visibility: visible; height: 120px; background-image: url(images/header.jpg); background-size: 120%;">
+                <a href="http://www.inamhi.gob.ec"><h:graphicImage url="/images/inamhilogo.png" alt="Welcome to Inamhi" title="Welcome to Inamhi" styleClass="alignright"/></a>
+                <a href="http://www.gestionderiesgos.gob.ec/"><h:graphicImage url="/images/sngr_logo.png" alt="Welcome to SNGR" title="Welcome to SNGR" styleClass="alignleft"/></a>
+            </div>
+            <div class="body" align="center">
+                <div align="center" >
+                    <div class="titulo" align="center"><br>SISTEMA  DE ALERTA TEMPRANA (S.A.T)
+                            PARA INUNDACIONES</br>
+                    </div>
+                    <br/>
+                    <p:panel id="panel21" style="width: 390px"   >
+                        <h:panelGrid columns="2" cellspacing="1"  >
+                            <h:outputText value="Hora local: "/>
+                            <p:clock pattern="dd/MM/yyyy HH:mm:ss" mode="server"/>
+                        </h:panelGrid>
+                    </p:panel>
+                    <h:panelGrid columns="2"  >
+
+                        <p:panel id="map"  header="Haga click sobre una zona para acceder " style="width: 520px; height: 560px;"  >
+                            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="504" height="513" id="invisibleButton" align="middle">
+                                <param name="movie" value="invisibleButton.swf" />
+                                <param name="quality" value="high" />
+                                <param name="bgcolor" value="#ffffff" />
+                                <param name="play" value="true" />
+                                <param name="loop" value="true" />
+                                <param name="wmode" value="window" />
+                                <param name="scale" value="showall" />
+                                <param name="menu" value="true" />
+                                <param name="devicefont" value="false" />
+                                <param name="salign" value="" />
+                                <param name="allowScriptAccess" value="sameDomain" />
+                                <!--[if !IE]>-->
+                                <object type="application/x-shockwave-flash" data="invisibleButton.swf" width="504" height="513">
+                                    <param name="movie" value="invisibleButton.swf" />
+                                    <param name="quality" value="high" />
+                                    <param name="bgcolor" value="#ffffff" />
+                                    <param name="play" value="true" />
+                                    <param name="loop" value="true" />
+                                    <param name="wmode" value="window" />
+                                    <param name="scale" value="showall" />
+                                    <param name="menu" value="true" />
+                                    <param name="devicefont" value="false" />
+                                    <param name="salign" value="" />
+                                    <param name="allowScriptAccess" value="sameDomain" />
+                                    <!--<![endif]-->
+                                    <a href="http://www.adobe.com/go/getflash">
+                                        <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+                                    </a>
+                                    <!--[if !IE]>-->
+                                </object>
+                                <!--<![endif]-->
+                            </object>
+                        </p:panel>
+                        <h:panelGrid id="hpg" columns="1" cellspacing="1" >
+
+
+                            <p:panel id="panel1"  style="width: 250px; "  >
+                                <p:dataTable id="datalist" value="#{sistController.items1}" var="item"  >  
+                                    <p:column headerText="Sistemas"  >
+                                        <h:outputText value="#{item.sistnomb}"/>
+                                    </p:column>
+                                    <p:column headerText="Estado" styleClass="#{item.sistesta eq 1 ? 'normal' : item.sistesta eq 2 ? 'aviso': item.sistesta eq 3 ? 'alerta' : null}"   >
+                                    </p:column>
+                                </p:dataTable>
+                                <p:panel id="panel12" >
+                                    <p:graphicImage value="/images/leyenda_situacion_cuencas.jpg" alt="Datos y Ubicación" height="65px" width="180px"  />
+                                </p:panel>
+                            </p:panel>
+                            <p:panel id="panel23"  header="Version de Prueba" style="width: 250px; "  >
+                                <div align="justify">
+                                    <h:outputText value="Estos sistemas están en etapa de implementación.
+                                                  Los datos provienen de equipos automáticos, que pueden variar con la realidad" style="font-family: cursive; color: red "/>
+                                </div>
+                            </p:panel>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </div>
+            </div> 
+        </h:form>
+    </h:body>
+</html>
+

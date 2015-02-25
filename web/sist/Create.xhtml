@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SistCreateDlg" widgetVar="SistCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateSistTitle}">
+
+            <h:form id="SistCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sistController.selected != null}">
+
+                        <h:outputLabel value="#{bundle.CreateSistLabel_sistnomb}" for="sistnomb" />
+                        <p:inputText id="sistnomb" value="#{sistController.selected.sistnomb}" title="#{bundle.CreateSistTitle_sistnomb}" />
+
+                        <h:outputLabel value="#{bundle.CreateSistLabel_sistesta}" for="sistesta" />
+                        <p:inputText id="sistesta" value="#{sistController.selected.sistesta}" title="#{bundle.CreateSistTitle_sistesta}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sistController.saveNew}" value="#{bundle.Save}" update="display,:SistListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,SistCreateDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SistCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

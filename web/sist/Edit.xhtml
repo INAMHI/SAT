@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SistEditDlg" widgetVar="SistEditDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.EditSistTitle}">
+
+            <h:form id="SistEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{sistController.selected != null}">
+
+                        <h:outputLabel value="#{bundle.EditSistLabel_sistId}" for="sistId" />
+                        <h:outputText id="sistId" value="#{sistController.selected.sistId}" />
+
+                        <h:outputLabel value="#{bundle.EditSistLabel_sistnomb}" for="sistnomb" />
+                        <p:inputText id="sistnomb" value="#{sistController.selected.sistnomb}" title="#{bundle.EditSistTitle_sistnomb}" />
+
+                        <h:outputLabel value="#{bundle.EditSistLabel_sistesta}" for="sistesta" />
+                        <p:inputText id="sistesta" value="#{sistController.selected.sistesta}" title="#{bundle.EditSistTitle_sistesta}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sistController.save}" value="#{bundle.Save}" update="display,:SistListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,SistEditDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SistEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

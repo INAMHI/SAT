@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>S.A.T. Cañar</title>
+        <style type="text/css">
+            .titulo{
+                font-size: 25px;
+                color: darkblue;
+                font-family: Calibri;
+                font-weight:  bold;
+            }
+
+            .alignright {
+                float: right;
+                padding-right: 45px;
+                padding-top: 16px;
+                height: 90px;
+            }
+
+
+            .alignleft {
+                float: left;
+                padding-left: 45px;
+                padding-top: 11px;
+            }
+
+
+            .body{
+                width: 100%;
+                height:100%;
+                margin: 0;
+                background-size: 100%;
+            }
+
+            .centeredColumn {
+                text-align:center !important;
+            }
+
+            html{
+                background-image: url(../images/DSC06124B.jpg);
+                height:100%;
+                margin: 0;
+            }
+            /* Toolbar styles */
+
+            /* The map and the location bar */
+            #map{
+                position: static;
+                width: 800px;
+                height: 400px;
+                border: 1px solid black;    
+            }
+        </style>
+        <script src="../resources/OpenLayers-2.13/OpenLayers.js" type="text/javascript"></script>
+        <script defer="defer" type="text/javascript">
+            // OpenLayers.ProxyHost = "http://localhost:8080/quercus-4.0.37/proxy/proxy.php?url=";
+            //OpenLayers.ProxyHost = "http://186.42.174.236:8080/quercus-4.0.37/proxy/proxy.php?url=";
+            var map;
+            var tiled;
+            var pureCoverage = false;
+            var bounds;
+           
+           
+            // pink tile avoidance
+            OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
+            // make OL compute scale according to WMS spec
+            OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
+        
+            function init(){
+                //var refresh = new OpenLayers.Strategy.Refresh({force: true, active: true});
+               
+                //OpenLayers.ProxyHost = "http://localhost:8080/quercus-4.0.37/proxy/proxy.php?url=";
+                
+                OpenLayers.ProxyHost = "/quercus-4.0.37/proxy/proxy.php?url=";
+                // if this is just a coverage or a group of them, disable a few items,
+                // and default to jpeg format
+                format = 'image/png';
+                if(pureCoverage) {
+                    document.getElementById('filterType').disabled = true;
+                    document.getElementById('filter').disabled = true;
+                    document.getElementById('antialiasSelector').disabled = true;
+                    document.getElementById('updateFilterButton').disabled = true;
+                    document.getElementById('resetFilterButton').disabled = true;
+                    document.getElementById('jpeg').selected = true;
+                    format = "image/jpeg";
+                }
+            
+                bounds = new OpenLayers.Bounds(
+                650299.7000000002, 9684500.93,
+                750680.4000000001, 9737035.78
+            );
+           
+                var options = {
+                    controls: [],
+                    maxExtent: bounds,
+                    maxResolution: 600.1121093749998,
+                    projection: "EPSG:32717",
+                    units: 'm'
+                };
+                map = new OpenLayers.Map('map', options);
+                // setup tiled layer
+                tiled = new OpenLayers.Layer.WMS(
+                
+                "Geoserver layers - Tiled", "http://186.42.174.236:8080/geoserver/INAMHI/wms",
+                
+                {
+                    LAYERS: 'prueba',
+                    STYLES: '',
+                    format: format,
+                    tiled: false,
+                   
+                    tilesOrigin : map.maxExtent.left + ',' + map.maxExtent.bottom
+                },
+                {
+                    buffer: 0,
+                    
+                    displayOutsideMaxExtent: true,
+                    isBaseLayer: true,
+                    yx : {'EPSG:32717' : false}
+                } ,
+                {strategies : [new OpenLayers.Strategy.Refresh({interval: 6000})]}
+                
+            );
+                map.addLayers([tiled]);
+
+                // build up all controls
+                map.addControl(new OpenLayers.Control.PanZoomBar({
+                    position: new OpenLayers.Pixel(2, 15)
+                }));
+                map.addControl(new OpenLayers.Control.Navigation());
+                map.addControl(new OpenLayers.Control.Scale($('scale')));
+                map.addControl(new OpenLayers.Control.MousePosition({element: $('location')}));
+                map.zoomToExtent(bounds);
+                                            
+               
+                var size = new OpenLayers.Size(21,25);
+                var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+                //instance the icon
+                var icon = new OpenLayers.Icon('../images/marker.png',size,offset);
+                //instance the marker layer
+                var markers = new OpenLayers.Layer.Markers("Markers");
+               
+                var marker = new OpenLayers.Marker(new OpenLayers.LonLat(715825,9729400),icon);
+                markers.addMarker(marker);
+                
+                var marker2 = new OpenLayers.Marker(new OpenLayers.LonLat(686227,9689100),icon.clone());
+                markers.addMarker(marker2);
+                
+                var marker3 = new OpenLayers.Marker(new OpenLayers.LonLat(666477,9720410),icon.clone());
+                markers.addMarker(marker3);
+                
+                var marker4 = new OpenLayers.Marker(new OpenLayers.LonLat(688152,9714680),icon.clone());
+                markers.addMarker(marker4);
+                
+                var marker5 = new OpenLayers.Marker(new OpenLayers.LonLat(707480,9720480),icon.clone());
+                markers.addMarker(marker5);
+                
+                var marker6 = new OpenLayers.Marker(new OpenLayers.LonLat(731566,9725620),icon.clone());
+                markers.addMarker(marker6);
+                
+                var marker7 = new OpenLayers.Marker(new OpenLayers.LonLat(746377,9710020),icon.clone());
+                markers.addMarker(marker7);
+                
+                var marker8 = new OpenLayers.Marker(new OpenLayers.LonLat(724767,9714110),icon.clone());
+                markers.addMarker(marker8);
+                
+                var marker9 = new OpenLayers.Marker(new OpenLayers.LonLat(676828,9696660),icon.clone());
+                markers.addMarker(marker9);
+                
+                var marker10 = new OpenLayers.Marker(new OpenLayers.LonLat(680569,9718640),icon.clone());
+                markers.addMarker(marker10);
+                
+                var marker11 = new OpenLayers.Marker(new OpenLayers.LonLat(679661,9696300),icon.clone());
+                markers.addMarker(marker11);
+                
+                var marker12 = new OpenLayers.Marker(new OpenLayers.LonLat(704922,9725240),icon.clone());
+                markers.addMarker(marker12);
+                
+                var marker13 = new OpenLayers.Marker(new OpenLayers.LonLat(661234,9718830),icon.clone());
+                markers.addMarker(marker13);
+                markers.setOpacity(0); 
+               
+                
+                map.addLayer(markers);
+                
+                var popup;
+                marker.events.register('mouseover', marker, function(evt) {
+                    popup = new OpenLayers.Popup.Anchored(
+                    'myPopup',
+                    new OpenLayers.LonLat(715825,9729400),
+                    new OpenLayers.Size(170, 45),
+                    "M0412\nSuscalpamba", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup);
+                });
+                marker.events.register('mouseout', marker, function(evt) {
+                    popup.hide()
+                });
+                
+                var popup2;
+                marker2.events.register('mouseover', marker2, function(evt) {
+                    popup2 = new OpenLayers.Popup.Anchored(
+                    'myPopup2',
+                    new OpenLayers.LonLat(686227,9689100),
+                    new OpenLayers.Size(190, 45),
+                    "M5089\nEl Tablón-Las Cuevas", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup2);
+                });
+                marker2.events.register('mouseout', marker2, function(evt) {
+                    popup2.hide()
+                });
+                
+                var popup3;
+                marker3.events.register('mouseover', marker3, function(evt) {
+                    popup3 = new OpenLayers.Popup.Anchored(
+                    'myPopup3',
+                    new OpenLayers.LonLat(666477,9720410),
+                    new OpenLayers.Size(170, 45),
+                    "M5090\nLa Lampada", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup3);
+                });
+                marker3.events.register('mouseout', marker3, function(evt) {
+                    popup3.hide()
+                });
+                
+                var popup4;
+                marker4.events.register('mouseover', marker4, function(evt) {
+                    popup4 = new OpenLayers.Popup.Anchored(
+                    'myPopup4',
+                    new OpenLayers.LonLat(688152,9714680),
+                    new OpenLayers.Size(170, 45),
+                    "M5091\nTanzaray", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup4);
+                });
+                marker4.events.register('mouseout', marker4, function(evt) {
+                    popup4.hide()
+                });
+                
+                var popup5;
+                marker5.events.register('mouseover', marker5, function(evt) {
+                    popup5 = new OpenLayers.Popup.Anchored(
+                    'myPopup5',
+                    new OpenLayers.LonLat(707480,9720480),
+                    new OpenLayers.Size(170, 45),
+                    "M5092\nGualleturo", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup5);
+                });
+                marker5.events.register('mouseout', marker5, function(evt) {
+                    popup5.hide()
+                });
+                
+                var popup6;
+                marker6.events.register('mouseover', marker6, function(evt) {
+                    popup6 = new OpenLayers.Popup.Anchored(
+                    'myPopup6',
+                    new OpenLayers.LonLat(731566,9725620),
+                    new OpenLayers.Size(170, 45),
+                    "M5093\nChacapamba", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup6);
+                });
+                marker6.events.register('mouseout', marker, function(evt) {
+                    popup6.hide()
+                });
+                
+                var popup7;
+                marker7.events.register('mouseover', marker7, function(evt) {
+                    popup7 = new OpenLayers.Popup.Anchored(
+                    'myPopup7',
+                    new OpenLayers.LonLat(746377,9710020),
+                    new OpenLayers.Size(170, 45),
+                    "M5094\nCochahuma", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup7);
+                });
+                marker7.events.register('mouseout', marker7, function(evt) {
+                    popup7.hide()
+                });
+                
+                var popup8;
+                marker8.events.register('mouseover', marker8, function(evt) {
+                    popup8 = new OpenLayers.Popup.Anchored(
+                    'myPopup8',
+                    new OpenLayers.LonLat(724767,9714110),
+                    new OpenLayers.Size(170, 45),
+                    "M5095\nEscudilla", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup8);
+                });
+                marker8.events.register('mouseout', marker8, function(evt) {
+                    popup8.hide()
+                });
+                
+                var popup9;
+                marker9.events.register('mouseover', marker9, function(evt) {
+                    popup9 = new OpenLayers.Popup.Anchored(
+                    'myPopup9',
+                    new OpenLayers.LonLat(676828,9696660),
+                    new OpenLayers.Size(170, 45),
+                    "M5096\nChipla", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup9);
+                });
+                marker9.events.register('mouseout', marker9, function(evt) {
+                    popup9.hide()
+                });
+                
+                var popup12;
+                marker12.events.register('mouseover', marker12, function(evt) {
+                    popup12 = new OpenLayers.Popup.Anchored(
+                    'myPopup12',
+                    new OpenLayers.LonLat(704922,9725240),
+                    new OpenLayers.Size(170, 45),
+                    "H0471\n"+"Cañar DJ Raura", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup12);
+                });
+                marker12.events.register('mouseout', marker12, function(evt) {
+                    popup12.hide()
+                });
+                
+                var popup13;
+                marker13.events.register('mouseover', marker13, function(evt) {
+                    popup13 = new OpenLayers.Popup.Anchored(
+                    'myPopup13',
+                    new OpenLayers.LonLat(661234,9718830),
+                    new OpenLayers.Size(170, 45),
+                    "H0472\n"+"Cañar en Pto.Inca", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup13);
+                });
+                marker13.events.register('mouseout', marker13, function(evt) {
+                    popup13.hide()
+                });
+                
+                var popup11;
+                marker11.events.register('mouseover', marker11, function(evt) {
+                    popup11 = new OpenLayers.Popup.Anchored(
+                    'myPopup11',
+                    new OpenLayers.LonLat(679661,9696300),
+                    new OpenLayers.Size(170, 45),
+                    "H1151\n"+"Río Miguir", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup11);
+                });
+                marker11.events.register('mouseout', marker11, function(evt) {
+                    popup11.hide()
+                });
+                
+                var popup10;
+                marker10.events.register('mouseover', marker10, function(evt) {
+                    popup10 = new OpenLayers.Popup.Anchored(
+                    'myPopup10',
+                    new OpenLayers.LonLat(680569,9718640),
+                    new OpenLayers.Size(170, 45),
+                    "H1150\n"+"Río Patul", 
+                    {size: {w: 14, h: 14}, offset: {x: -7, y: -7}},
+                    false
+                );
+                  
+                    map.addPopup(popup10);
+                });
+                marker10.events.register('mouseout', marker10, function(evt) {
+                    popup10.hide()
+                });
+                
+                // support GetFeatureInfo
+                map.events.register('click', map, function (e) {
+                    //document.getElementById('nodelist').innerHTML = "Loading... please wait...";
+                    var params1 = {
+                        REQUEST: "GetFeatureInfo",
+                        EXCEPTIONS: "application/vnd.ogc.se_xml",
+                        BBOX: map.getExtent().toBBOX(),
+                        SERVICE: "WMS",
+                        INFO_FORMAT: 'application/json',
+                        QUERY_LAYERS: 'Est_meteo_caniar,Est_hidro_caniar',
+                        FEATURE_COUNT: 50,
+                        Layers: 'prueba',
+                        WIDTH: map.size.w,
+                        HEIGHT: map.size.h,
+                        format: format,
+                        styles: map.layers[0].params.STYLES,
+                        srs: map.layers[0].params.SRS};
+                    
+                    // handle the wms 1.3 vs wms 1.1 madness
+                    if(map.layers[0].params.VERSION == "1.3.0") {
+                        params1.version = "1.3.0";
+                        params1.j = Math.floor(e.xy.x);
+                        params1.i = Math.floor(e.xy.y);
+                    } else {
+                        params1.version = "1.1.1";
+                        params1.x = Math.floor(e.xy.x);
+                        params1.y = Math.floor(e.xy.y);
+                    }
+                        
+                    // merge filters
+                    if(map.layers[0].params.CQL_FILTER != null) {
+                        params1.cql_filter = map.layers[0].params.CQL_FILTER;
+                    } 
+                    if(map.layers[0].params.FILTER != null) {
+                        params1.filter = map.layers[0].params.FILTER;
+                    }
+                    if(map.layers[0].params.FEATUREID) {
+                        params1.featureid = map.layers[0].params.FEATUREID;
+                    }
+                    OpenLayers.Request.GET({url:"http://186.42.174.236:8080/geoserver/INAMHI/wms",headers: {'Accept':'application/json'}, params:params1, success:setHTML});
+                    OpenLayers.Event.stop(e);
+                });
+               
+            }
+            
+            function centrarZonas(){
+                map.setCenter(new OpenLayers.LonLat(663525,9718900), 4)
+            }
+            
+            function centrarMapa(){
+                map.zoomToExtent(bounds);
+            }
+            
+            function refrescar(){
+                //alert("funciona!!");
+                tiled.redraw(true);
+            }
+            
+            // sets the HTML provided into the nodelist element
+            function setHTML(response){
+                //OpenLayers.ProxyHost = "http://localhost:8080/quercus-4.0.37/proxy/proxy.php?url=";
+                //alert(response);
+                OpenLayers.ProxyHost = "/quercus-4.0.37/proxy/proxy.php?url=";
+                var respuesta=response.responseText;
+                var datos2 = JSON.parse(respuesta);
+                var cod_estacion=datos2.features[0].properties.codigo_red;
+                var nom_estacion=datos2.features[0].properties.nombre;
+                var parametro=datos2.features[0].properties.copa;
+                //alert(cod_estacion); //retur              
+                window.location = "/SAT/faces/caniar/datosEstacionCaniar.xhtml?estacion="+cod_estacion+"&amp;copa="+parametro+"&amp;nombre="+nom_estacion;
+            }
+
+        </script>
+    </h:head>
+    <h:body  onload="init()">
+        <div align="center" style="visibility: visible; height: 120px; background-image: url(../images/header.jpg); background-size: 120%;">
+            <a href="http://www.inamhi.gob.ec"><h:graphicImage url="/images/inamhilogo.png" alt="Welcome to Inamhi" title="Welcome to Inamhi" styleClass="alignright"/></a>
+            <a href="http://www.gestionderiesgos.gob.ec/"><h:graphicImage url="/images/sngr_logo.png" alt="Welcome to SNGR" title="Welcome to SNGR" styleClass="alignleft"/></a>
+        </div>
+        <div class="body" align="center">
+
+            <div align="center" >
+                <div class="titulo" align="center"><br/>SISTEMA  DE ALERTA TEMPRANA PARA INUNDACIONES (S.A.T) CAÑAR
+                </div>
+                <p:panel id="mapa"  style="width: 830px; height: 450px;"  >
+                    <h:panelGrid columns="3">
+                        <button onclick="centrarZonas()" name="Zonas de alerta" >Zonas de riesgo</button>
+                        <button onclick="centrarMapa()" name="Zonas de alerta">Centrar</button>
+                        <button onclick="refrescar()" name="Zonas de alerta">Redraw</button>
+                    </h:panelGrid>
+                    <div id="map">
+                    </div>
+                </p:panel>
+                <p:dialog header="Modelos" widgetVar="dlg2" height="800px"  modal="true">
+                    <p:tabView style="height:800px;"  >
+                        <p:tab title="Precipitación " >
+                            <p:tabView style="height:700px;" >
+                                <p:tab title="3 horas" >
+                                    <h:graphicImage url="http://186.42.174.231/pronostico/animacion_modelo/canar_p_3h.gif" width="100%" height="600px"  title="Modelo"  />
+                                </p:tab>
+                                <p:tab title="1 dia">
+                                    <h:graphicImage url="http://186.42.174.231/pronostico/animacion_modelo/canar_p_dia.gif" width="100%" height="600px"  title="Modelo"  />
+                                </p:tab>
+                            </p:tabView>
+                        </p:tab>
+                        <p:tab title="Temperatura">
+                            <p:tabView>
+                                <p:tab title="3 horas">
+                                    <h:graphicImage url="http://186.42.174.231/pronostico/animacion_modelo/canar_t_3h.gif" width="100%" height="600px"  title="Modelo"  />
+                                </p:tab>
+                                <p:tab title="1 dia">
+                                    <h:graphicImage url="http://186.42.174.231/pronostico/animacion_modelo/canar_t_dia.gif" width="100%" height="600px"  title="Modelo"  />
+                                </p:tab>
+                            </p:tabView>
+
+                        </p:tab>
+                        <p:tab title="Humedad">
+                            <p:tabView>
+                                <p:tab title="3 horas">
+                                    <h:graphicImage url="http://186.42.174.231/pronostico/animacion_modelo/canar_h_3h.gif" width="100%" height="600px"  title="Modelo"  />
+                                </p:tab>
+                                <p:tab title="1 dia">
+                                    <h:graphicImage url="http://186.42.174.231/pronostico/animacion_modelo/canar_h_dia.gif" width="100%" height="600px"  title="Modelo"  />
+                                </p:tab>
+                            </p:tabView>
+
+                        </p:tab>
+                        <p:tab title="Viento">
+                            <p:tabView>
+                                <p:tab title="3 horas">
+                                    <h:graphicImage url="http://186.42.174.231/pronostico/animacion_modelo/canar_v_3h.gif" width="100%" height="600px"  title="Modelo"  />
+                                </p:tab>
+                                <p:tab title="1 dia">
+                                    <h:graphicImage url="http://186.42.174.231/pronostico/animacion_modelo/canar_v_dia.gif" width="100%" height="600px"  title="Modelo"  />
+                                </p:tab>
+                            </p:tabView>
+                        </p:tab>
+                    </p:tabView>
+                </p:dialog>   
+                <h:panelGrid columns="1">
+                    <p:panel>     
+                        <h:form>
+                            <p:poll onsuccess="refrescar()" interval="300" />   
+                            <h:panelGrid columns="2" >
+                                <h:panelGrid columns="1" >
+
+                                    <p:commandLink  onclick="PF('dlg2').show();" >
+                                        <h:graphicImage url="/images/boton1.PNG" alt="Home" title="Boletin"   />
+                                    </p:commandLink>
+                                    <p:commandLink >
+                                        <h:graphicImage url="/images/boton2.PNG" alt="Home" title="Contactos"  />
+                                    </p:commandLink>
+                                    <p:commandLink action="/index.xhtml?faces-redirect=true" ajax="true" >
+                                        <h:graphicImage url="/images/home.png" alt="Home" title="Inicio" width="64" height="64"  />
+                                    </p:commandLink>
+                                </h:panelGrid>
+                                <h:panelGrid columns="3" >
+                                    <p:graphicImage value="/images/leyenda_estaciones.jpg" alt="Datos y Ubicación" height="220px"  />
+                                    <p:graphicImage value="/images/leyenda.jpg" alt="Datos y Ubicación" height="220px" />
+                                    <p:graphicImage value="/images/simbologia.jpg" alt="Datos y Ubicación" height="220px" />
+                                </h:panelGrid>
+                            </h:panelGrid>   
+                        </h:form>
+                    </p:panel>
+
+                </h:panelGrid>
+            </div>
+        </div> 
+    </h:body>
+</html>

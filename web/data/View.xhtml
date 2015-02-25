@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DataViewDlg" widgetVar="DataViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewDataTitle}">
+
+            <h:form id="DataViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{dataController.selected != null}">
+
+                        <h:outputText value="#{bundle.ViewDataLabel_dataId}"/>
+                        <h:outputText value="#{dataController.selected.dataId}" title="#{bundle.ViewDataTitle_dataId}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_estaId}"/>
+                        <h:outputText value="#{dataController.selected.estaId}" title="#{bundle.ViewDataTitle_estaId}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_datafetd}"/>
+                        <h:outputText value="#{dataController.selected.datafetd}" title="#{bundle.ViewDataTitle_datafetd}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_datavalo}"/>
+                        <h:outputText value="#{dataController.selected.datavalo}" title="#{bundle.ViewDataTitle_datavalo}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_dataince}"/>
+                        <h:outputText value="#{dataController.selected.dataince}" title="#{bundle.ViewDataTitle_dataince}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_indaId}"/>
+                        <h:outputText value="#{dataController.selected.indaId}" title="#{bundle.ViewDataTitle_indaId}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_dataobse}"/>
+                        <h:outputText value="#{dataController.selected.dataobse}" title="#{bundle.ViewDataTitle_dataobse}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_datactrl}"/>
+                        <h:outputText value="#{dataController.selected.datactrl}" title="#{bundle.ViewDataTitle_datactrl}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_datavers}"/>
+                        <h:outputText value="#{dataController.selected.datavers}" title="#{bundle.ViewDataTitle_datavers}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_datauing}"/>
+                        <h:outputText value="#{dataController.selected.datauing}" title="#{bundle.ViewDataTitle_datauing}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_datafing}"/>
+                        <h:outputText value="#{dataController.selected.datafing}" title="#{bundle.ViewDataTitle_datafing}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_dataumod}"/>
+                        <h:outputText value="#{dataController.selected.dataumod}" title="#{bundle.ViewDataTitle_dataumod}"/>
+
+                        <h:outputText value="#{bundle.ViewDataLabel_datafmod}"/>
+                        <h:outputText value="#{dataController.selected.datafmod}" title="#{bundle.ViewDataTitle_datafmod}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DataViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

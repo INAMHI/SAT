@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SistViewDlg" widgetVar="SistViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewSistTitle}">
+
+            <h:form id="SistViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sistController.selected != null}">
+
+                        <h:outputText value="#{bundle.ViewSistLabel_sistId}"/>
+                        <h:outputText value="#{sistController.selected.sistId}" title="#{bundle.ViewSistTitle_sistId}"/>
+
+                        <h:outputText value="#{bundle.ViewSistLabel_sistnomb}"/>
+                        <h:outputText value="#{sistController.selected.sistnomb}" title="#{bundle.ViewSistTitle_sistnomb}"/>
+
+                        <h:outputText value="#{bundle.ViewSistLabel_sistesta}"/>
+                        <h:outputText value="#{sistController.selected.sistesta}" title="#{bundle.ViewSistTitle_sistesta}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SistViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

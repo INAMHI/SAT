@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DataEditDlg" widgetVar="DataEditDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.EditDataTitle}">
+
+            <h:form id="DataEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{dataController.selected != null}">
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_dataId}" for="dataId" />
+                        <h:outputText id="dataId" value="#{dataController.selected.dataId}" />
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_estaId}" for="estaId" />
+                        <p:inputText id="estaId" value="#{dataController.selected.estaId}" title="#{bundle.EditDataTitle_estaId}" />
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_datafetd}" for="datafetd" />
+                        <p:calendar id="datafetd" pattern="MM/dd/yyyy HH:mm:ss" value="#{dataController.selected.datafetd}" title="#{bundle.EditDataTitle_datafetd}" required="true" requiredMessage="#{bundle.EditDataRequiredMessage_datafetd}" showOn="button"/>
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_datavalo}" for="datavalo" />
+                        <p:inputText id="datavalo" value="#{dataController.selected.datavalo}" title="#{bundle.EditDataTitle_datavalo}" />
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_dataince}" for="dataince" />
+                        <p:inputText id="dataince" value="#{dataController.selected.dataince}" title="#{bundle.EditDataTitle_dataince}" />
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_indaId}" for="indaId" />
+                        <p:inputText id="indaId" value="#{dataController.selected.indaId}" title="#{bundle.EditDataTitle_indaId}" />
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_dataobse}" for="dataobse" />
+                        <p:inputText id="dataobse" value="#{dataController.selected.dataobse}" title="#{bundle.EditDataTitle_dataobse}" />
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_datactrl}" for="datactrl" />
+                        <p:inputText id="datactrl" value="#{dataController.selected.datactrl}" title="#{bundle.EditDataTitle_datactrl}" />
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_datavers}" for="datavers" />
+                        <p:inputText id="datavers" value="#{dataController.selected.datavers}" title="#{bundle.EditDataTitle_datavers}" />
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_datauing}" for="datauing" />
+                        <p:inputText id="datauing" value="#{dataController.selected.datauing}" title="#{bundle.EditDataTitle_datauing}" required="true" requiredMessage="#{bundle.EditDataRequiredMessage_datauing}"/>
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_datafing}" for="datafing" />
+                        <p:calendar id="datafing" pattern="MM/dd/yyyy HH:mm:ss" value="#{dataController.selected.datafing}" title="#{bundle.EditDataTitle_datafing}" required="true" requiredMessage="#{bundle.EditDataRequiredMessage_datafing}" showOn="button"/>
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_dataumod}" for="dataumod" />
+                        <p:inputText id="dataumod" value="#{dataController.selected.dataumod}" title="#{bundle.EditDataTitle_dataumod}" />
+
+                        <h:outputLabel value="#{bundle.EditDataLabel_datafmod}" for="datafmod" />
+                        <p:calendar id="datafmod" pattern="MM/dd/yyyy HH:mm:ss" value="#{dataController.selected.datafmod}" title="#{bundle.EditDataTitle_datafmod}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{dataController.save}" value="#{bundle.Save}" update="display,:DataListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,DataEditDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DataEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
